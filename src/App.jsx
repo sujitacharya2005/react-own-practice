@@ -2,8 +2,25 @@ import { CORE_CONCEPTS } from "./data";
 import Header from "./components/Header/Header";
 import CoreConcepts from "./components/CoreConcept";
 import TabButton from "./components/TabButton";
+import { useState } from "react";
 
 function App() {
+  const [selectedTopic, setSelectedTopic] = useState("Pease click a button");
+  /*
+  By default react component executed once you have to tell React if a Component should be executed again.
+
+  let tabContent = "Please click a button";
+  function handleSelect(selectedButton) {
+    tabContent = selectedButton;
+    console.log(tabContent);
+  }*/
+
+  function handleSelect(selectedButton) {
+    setSelectedTopic(selectedButton);
+    console.log(selectedTopic);
+  }
+
+  console.log("APP COMPONENT EXECUTING");
   return (
     <div>
       <Header />
@@ -24,11 +41,15 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton>Components</TabButton>
-            <TabButton>JSX</TabButton>
-            <TabButton>Props</TabButton>
-            <TabButton>State</TabButton>
+            <TabButton onSelect={() => handleSelect("Components")}>
+              Components
+            </TabButton>
+            <TabButton onSelect={() => handleSelect("jsx")}>JSX</TabButton>
+            <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
+            <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
           </menu>
+          {selectedTopic}
+          {/* {tabContent} Not undating value because component is not loading*/}
         </section>
       </main>
     </div>
